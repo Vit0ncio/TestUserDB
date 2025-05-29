@@ -1,4 +1,4 @@
-package main;
+package br.testuserdb;
 
 public class Main {
 }
