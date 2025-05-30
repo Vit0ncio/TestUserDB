@@ -7,7 +7,7 @@ public class DataDAO {
     PreparedStatement ps = null;
     ResultSet rs = null;
 
-    private void connectDB() {
+    public void connectDB() {
         try {
             conn = DriverManager.getConnection("jdbc:sqlite:testuser.db", "root", "");
             System.out.println("Connection successful.");
@@ -16,7 +16,7 @@ public class DataDAO {
         }
     }
 
-    private void disconnectDB() {
+    public void disconnectDB() {
         if (rs != null) {
             try {
                 rs.close();
@@ -32,6 +32,7 @@ public class DataDAO {
         if (conn != null) {
             try {
                 conn.close();
+                System.out.println("Connection closed.");
             } catch (SQLException e) { }
         }
     }
