@@ -1,11 +1,12 @@
 package br.testuserdb;
 
-import br.testuserdb.dao.DataDAO;
+import br.testuserdb.dao.ConnectDAO;
 
 public class Main {
     public static void main(String[] args) {
-        DataDAO dataDAO = new DataDAO();
+        ConnectDAO connDAO = new ConnectDAO();
 
-        dataDAO.connectDB();
+        connDAO.connectDB();
+        connDAO.disconnectDB();
     }
 }
