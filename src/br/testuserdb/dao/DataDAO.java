@@ -8,26 +8,37 @@ public class DataDAO {
     ConnectDAO connDAO = new ConnectDAO();
 
     public void createDB() {
-        try {
-            File file = new File("db/testuser.db");
-            Scanner scan = new Scanner(System.in);
+        File file = new File("db/testuser.db");
+        Scanner scan = new Scanner(System.in);
 
+        try {
             if (!file.exists()) {
                 System.out.println("Database not found. You want to create a new one? [Y/N]");
                 String choice = scan.nextLine().trim().toLowerCase();
 
                 switch (choice) {
-                    case "y":
-                        file.createNewFile();
-                        System.out.println("File created.");
-                        break;
+                    case "y" -> {
+                        if (file.getParentFile() != null) {
+                            file.getParentFile().mkdirs();
+                        }
 
-                    case "n":
+                        boolean created = file.createNewFile();
+
+                        if (created) {
+                            System.out.println("File created.");
+                        } else {
+                            System.out.println("File could not be created.");
+                        }
+
+                        break;
+                    }
+
+                    case "n" -> {
                         connDAO.connectDB();
                         break;
+                    }
 
-                    default:
-                        System.out.println("Choice a valid option.");
+                    default -> System.out.println("Choice a valid option.");
                 }
             }
         } catch (IOException ioe) {
