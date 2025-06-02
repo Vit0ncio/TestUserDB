@@ -6,30 +6,28 @@ import java.util.Scanner;
 
 public class DataDAO {
     ConnectDAO connDAO = new ConnectDAO();
+    File database = new File("db/testuser.db");
+    Scanner scan = new Scanner(System.in);
 
     public void createDB() {
-        File file = new File("db/testuser.db");
-        Scanner scan = new Scanner(System.in);
-
         try {
-            if (!file.exists()) {
+            if (!database.exists()) {
                 System.out.println("Database not found. You want to create a new one? [Y/N]");
                 String choice = scan.nextLine().trim().toLowerCase();
 
                 switch (choice) {
                     case "y" -> {
-                        if (file.getParentFile() != null) {
-                            file.getParentFile().mkdirs();
+                        if (database.getParentFile() != null) {
+                            database.getParentFile().mkdirs();
                         }
 
-                        boolean created = file.createNewFile();
+                        boolean created = database.createNewFile();
 
                         if (created) {
                             System.out.println("File created.");
                         } else {
                             System.out.println("File could not be created.");
                         }
-
                         break;
                     }
 
@@ -42,8 +40,19 @@ public class DataDAO {
                 }
             }
         } catch (IOException ioe) {
-            System.out.println("A error occurred.");
-            System.out.println(ioe.getMessage());
+            System.out.println("A error occurred. " + ioe.getMessage());
+        }
+    }
+
+    public void deleteDB() {
+        if (database.exists()) {
+            boolean deleted = database.delete();
+
+            if (deleted) {
+                System.out.println("Database deleted successfully.");
+            } else {
+                System.out.println("Failed to delete the database.");
+            }
         }
     }
 }
