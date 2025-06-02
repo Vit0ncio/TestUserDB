@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class ConnectDAO {
     Connection conn = null;
-    PreparedStatement ps = null;
+    PreparedStatement stmt = null;
     ResultSet rs = null;
 
     public Connection connectDB() {
@@ -22,15 +22,21 @@ public class ConnectDAO {
         // Close the connection with the database
         // Exactly in this order: ResultSet, PreparedStatement and Connection
         try {
-            rs.close();
+            if (rs != null && !rs.isClosed()) {
+                rs.close();
+            }
         } catch (SQLException e) {
         }
         try {
-            ps.close();
+            if (stmt != null && !stmt.isClosed()) {
+                stmt.close();
+            }
         } catch (SQLException e) {
         }
         try {
-            conn.close();
+            if (conn != null && !conn.isClosed()) {
+                conn.close();
+            }
         } catch (SQLException e) {
         }
     }
