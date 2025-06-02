@@ -10,7 +10,7 @@ public class ConnectDAO {
     public void connectDB() {
         try {
             // Get the URL to database
-            conn = DriverManager.getConnection("jdbc:sqlite:testuser.db");
+            conn = DriverManager.getConnection("jdbc:sqlite:db/testuser.db");
             System.out.println("Connection successful.");
         } catch (SQLException sqle) {
             System.out.println(sqle.getMessage());

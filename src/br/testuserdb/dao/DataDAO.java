@@ -37,7 +37,6 @@ public class DataDAO {
                     case "n" -> {
                         // If the user doesn't want to create the database, go to connect to the database
                         // SQLite creates a new one when connecting, in the project root folder
-                        connDAO.connectDB();
                         break;
                     }
 
@@ -47,6 +46,8 @@ public class DataDAO {
         } catch (IOException ioe) {
             System.out.println("A error occurred. " + ioe.getMessage());
         }
+
+        connDAO.connectDB();
     }
 
     public void deleteDB() {
