@@ -9,15 +9,18 @@ public class DataDAO {
     File database = new File("db/testuser.db");
     Scanner scan = new Scanner(System.in);
 
+    // Create the database file
     public void createDB() {
         try {
             if (!database.exists()) {
+                // If the file doesn't exist, ask the user if he wants to create a new one
                 System.out.println("Database not found. You want to create a new one? [Y/N]");
                 String choice = scan.nextLine().trim().toLowerCase();
 
                 switch (choice) {
                     case "y" -> {
                         if (database.getParentFile() != null) {
+                            // If the directory db doesn't exist, create a new one
                             database.getParentFile().mkdirs();
                         }
 
@@ -32,6 +35,8 @@ public class DataDAO {
                     }
 
                     case "n" -> {
+                        // If the user doesn't want to create the database, go to connect to the database
+                        // SQLite creates a new one when connecting, in the project root folder
                         connDAO.connectDB();
                         break;
                     }

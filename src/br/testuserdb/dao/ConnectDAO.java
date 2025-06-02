@@ -9,6 +9,7 @@ public class ConnectDAO {
 
     public void connectDB() {
         try {
+            // Get the URL to database
             conn = DriverManager.getConnection("jdbc:sqlite:testuser.db");
             System.out.println("Connection successful.");
         } catch (SQLException sqle) {
@@ -17,6 +18,8 @@ public class ConnectDAO {
     }
 
     public void disconnectDB() {
+        // Close the connection with the database
+        // Exactly in this order: ResultSet, PreparedStatement and Connection
         try {
             rs.close();
         } catch (SQLException e) {
