@@ -7,6 +7,6 @@ public class Main {
         // Tests and more tests, remove them
         // The main file, responsible for executing the project
         DataDAO dataDAO = new DataDAO();
-        dataDAO.createDB();
+        dataDAO.insertDB();
     }
 }

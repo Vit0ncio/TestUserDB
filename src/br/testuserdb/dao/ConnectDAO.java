@@ -7,7 +7,7 @@ public class ConnectDAO {
     PreparedStatement ps = null;
     ResultSet rs = null;
 
-    public void connectDB() {
+    public Connection connectDB() {
         try {
             // Get the URL to database
             conn = DriverManager.getConnection("jdbc:sqlite:db/testuser.db");
@@ -15,6 +15,7 @@ public class ConnectDAO {
         } catch (SQLException sqle) {
             System.out.println(sqle.getMessage());
         }
+        return conn;
     }
 
     public void disconnectDB() {
