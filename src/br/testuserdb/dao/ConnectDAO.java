@@ -17,23 +17,17 @@ public class ConnectDAO {
     }
 
     public void disconnectDB() {
-        if (rs != null) {
-            try {
-                rs.close();
-            } catch (SQLException sqle) { }
+        try {
+            rs.close();
+        } catch (SQLException e) {
         }
-
-        if (ps != null) {
-            try {
-                ps.close();
-            } catch (SQLException sqle) { }
+        try {
+            ps.close();
+        } catch (SQLException e) {
         }
-
-        if (conn != null) {
-            try {
-                conn.close();
-                System.out.println("Connection closed.");
-            } catch (SQLException e) { }
+        try {
+            conn.close();
+        } catch (SQLException e) {
         }
     }
 }
