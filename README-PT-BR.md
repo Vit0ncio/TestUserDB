@@ -1,4 +1,4 @@
-For the readme in (English)[README.md]
+For the readme in [English](README.md)
 # TestUserDB
 
 🚧 *Work in Progress (W.I.P.)* 🚧  
