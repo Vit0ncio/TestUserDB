@@ -1,3 +1,4 @@
+Para o readme em 🇧🇷 [português](README-PT-BR.md)
 # TestUserDB
 
 🚧 *Work in Progress (W.I.P.)* 🚧  
