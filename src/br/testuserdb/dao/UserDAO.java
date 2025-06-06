@@ -8,14 +8,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserDAO {
-    ConnectDAO connDAO = new ConnectDAO();
-    Connection conn = null;
-    PreparedStatement stmt = null;
-    ResultSet rs = null;
+    public static User login(String name, String password) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
 
-    public User login(String name, String password) {
         try {
-            conn = connDAO.connectDB();
+            conn = ConnectDAO.connectDB();
             String sql = "select * from users where name = ? and password = ?";
             stmt = conn.prepareStatement(sql);
 
@@ -38,7 +37,7 @@ public class UserDAO {
         } catch (SQLException sqle) {
             System.out.println("Error in login: " + sqle.getMessage());
         } finally {
-            connDAO.disconnectDB();
+            ConnectDAO.disconnectDB();
         }
         return null;
     }
