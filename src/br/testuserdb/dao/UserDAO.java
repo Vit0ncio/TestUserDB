@@ -36,9 +36,8 @@ public class UserDAO {
             return null;
         } catch (SQLException sqle) {
             System.out.println("Error in login: " + sqle.getMessage());
-        } finally {
-            ConnectDAO.disconnectDB();
         }
+        ConnectDAO.disconnectDB();
         return null;
     }
 }

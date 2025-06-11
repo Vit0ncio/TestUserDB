@@ -7,7 +7,7 @@ import br.testuserdb.model.User;
 import java.util.Scanner;
 
 public class Main {
-    User user
+    User user;
     static Scanner scan = new Scanner(System.in);
 
     public static void main(String[] args) {
