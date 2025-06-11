@@ -31,13 +31,15 @@ public class UserDAO {
                         rs.getString("password"),
                         rs.getString("role")
                 );
-                return user;
+            } else {
+                System.out.println("User not found. Password or Name incorrect.");
             }
             return null;
         } catch (SQLException sqle) {
             System.out.println("Error in login: " + sqle.getMessage());
+        } finally {
+            ConnectDAO.disconnectDB();
         }
-        ConnectDAO.disconnectDB();
         return null;
     }
 }

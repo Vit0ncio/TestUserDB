@@ -1,13 +1,12 @@
 package br.testuserdb;
 
-import br.testuserdb.dao.DataDAO;
 import br.testuserdb.dao.UserDAO;
 import br.testuserdb.model.User;
 
 import java.util.Scanner;
 
 public class Main {
-    User user;
+    static User user;
     static Scanner scan = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -21,6 +20,6 @@ public class Main {
         System.out.println("Enter your password");
         String password = scan.nextLine();
 
-        User user = UserDAO.login(name, password);
+        user = UserDAO.login(name, password);
     }
 }
