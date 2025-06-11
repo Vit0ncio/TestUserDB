@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserDAO {
+    static User user;
     public static User login(String name, String password) {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -24,7 +25,7 @@ public class UserDAO {
             rs = stmt.executeQuery();
 
             if (rs.next()) {
-                User user = new User(
+                user = new User(
                         rs.getInt("id"),
                         rs.getString("name"),
                         rs.getString("email"),
@@ -34,12 +35,11 @@ public class UserDAO {
             } else {
                 System.out.println("User not found. Password or Name incorrect.");
             }
-            return null;
         } catch (SQLException sqle) {
             System.out.println("Error in login: " + sqle.getMessage());
         } finally {
             ConnectDAO.disconnectDB();
         }
-        return null;
+        return user;
     }
 }

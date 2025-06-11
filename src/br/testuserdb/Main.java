@@ -13,7 +13,7 @@ public class Main {
         login();
     }
     
-    public static void login() {
+    public static boolean login() {
         System.out.println("TestUserDB - LOGIN");
         System.out.println("Enter your name");
         String name = scan.nextLine();
@@ -21,5 +21,13 @@ public class Main {
         String password = scan.nextLine();
 
         user = UserDAO.login(name, password);
+
+        if (user != null) {
+            System.out.println("Welcome " + user.getName() + "!");
+            return true;
+        } else {
+            System.out.println("Invalid login. Try Again.");
+            return false;
+        }
     }
 }
