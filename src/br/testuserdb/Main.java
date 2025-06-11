@@ -11,6 +11,29 @@ public class Main {
 
     public static void main(String[] args) {
         login();
+        menu();
+    }
+
+    public static void menu() {
+        System.out.println("What do you want to do?");
+        System.out.println("1 - See other users");
+        System.out.println("0 - Exit");
+        byte choice = scan.nextByte();
+
+        scan.nextLine();
+
+        switch (choice) {
+            case 1 -> {
+                readUser();
+            }
+
+            case 0 -> {
+                System.out.println("Bye bye!");
+                break;
+            }
+
+            default -> System.out.println("Invalid option. Try Again.");
+        }
     }
     
     public static boolean login() {
@@ -29,5 +52,13 @@ public class Main {
             System.out.println("Invalid login. Try Again.");
             return false;
         }
+    }
+
+    public static void readUser() {
+        System.out.println("Enter a name:");
+        String name = scan.nextLine();
+
+        user = UserDAO.readUser(name);
+        menu();
     }
 }
