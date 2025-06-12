@@ -18,8 +18,10 @@ public class Main {
     }
 
     public static void menu() {
+        DataDAO dataDAO = new DataDAO();
         System.out.println("What do you want to do?");
         System.out.println("1 - See other users");
+        System.out.println("2 - Delete Database");
         System.out.println("0 - Exit");
         byte choice = scan.nextByte();
 
@@ -28,6 +30,10 @@ public class Main {
         switch (choice) {
             case 1 -> {
                 readUser();
+            }
+
+            case 2 -> {
+                dataDAO.deleteDB();
             }
 
             case 0 -> {

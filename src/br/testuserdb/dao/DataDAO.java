@@ -55,10 +55,16 @@ public class DataDAO {
     }
 
     public void deleteDB() {
+        ConnectDAO connDAO = new ConnectDAO();
+        ResultSet rs = null;
+        PreparedStatement stmt = null;
+        Connection conn = null;
         File database = new File("db/testuser.db");
 
         if (database.exists()) {
             boolean deleted = database.delete();
+
+            connDAO.disconnectDB(conn, stmt, rs);
 
             if (deleted) {
                 System.out.println("Database deleted successfully.");
