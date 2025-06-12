@@ -4,17 +4,18 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
 public class DataDAO {
-    ConnectDAO connDAO = new ConnectDAO();
-    File database = new File("db/testuser.db");
-    Scanner scan = new Scanner(System.in);
-    PreparedStatement stmt = null;
 
     // Create the database file
     public void createDB() {
+        Scanner scan = new Scanner(System.in);
+        File database = new File("db/testuser.db");
+        ConnectDAO connDAO = new ConnectDAO();
+
         try {
             if (!database.exists()) {
                 // If the file doesn't exist, ask the user if he wants to create a new one
@@ -54,6 +55,8 @@ public class DataDAO {
     }
 
     public void deleteDB() {
+        File database = new File("db/testuser.db");
+
         if (database.exists()) {
             boolean deleted = database.delete();
 
@@ -66,7 +69,10 @@ public class DataDAO {
     }
 
     public void insertDB() {
-        Connection conn = connDAO.connectDB();
+        ResultSet rs = null;
+        PreparedStatement stmt = null;
+        ConnectDAO connDAO = new ConnectDAO();
+        Connection conn = null;
 
         // Create the table
         String createTableSQL = "create table if not exists users (" +
@@ -78,7 +84,8 @@ public class DataDAO {
                      ");";
 
         // Prepare the update in the sql string
-        try (PreparedStatement stmt = conn.prepareStatement(createTableSQL)){
+        try {
+            stmt = conn.prepareStatement(createTableSQL);
             stmt.execute(); // Execute the sql string
             System.out.println("Table created.");
         } catch (SQLException sqle) {
@@ -94,7 +101,9 @@ public class DataDAO {
         // Insert data in the table
         String insertSQL = "insert into users(name, email, password, role) values(?,?,?,?)";
 
-        try (PreparedStatement stmt = conn.prepareStatement(insertSQL)) {
+        try {
+            stmt = conn.prepareStatement(insertSQL);
+
             // Made a for loop to insert the users
             // Why does SQLite work like this? I don't know
             // Adds users up to the limit of names entered
@@ -110,6 +119,6 @@ public class DataDAO {
             System.out.println("Insert error: " + sqle.getMessage());
         }
         // Disconnect from the database
-        connDAO.disconnectDB();
+        connDAO.disconnectDB(conn, stmt, rs);
     }
 }
