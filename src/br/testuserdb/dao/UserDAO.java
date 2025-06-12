@@ -58,12 +58,6 @@ public class UserDAO {
 
             rs = stmt.executeQuery();
 
-            if (rs.next()) {
-                System.out.println("User found.");
-            } else {
-                System.out.println("User not found.");
-            }
-
             while (rs.next()) {
                 int id = rs.getInt("id");
                 name = rs.getString("name");

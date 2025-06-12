@@ -7,8 +7,6 @@ import br.testuserdb.model.User;
 import java.util.Scanner;
 
 public class Main {
-    static User user;
-    static Scanner scan = new Scanner(System.in);
 
     public static void main(String[] args) {
         DataDAO dataDAO = new DataDAO();
@@ -18,7 +16,9 @@ public class Main {
     }
 
     public static void menu() {
+        Scanner scan = new Scanner(System.in);
         DataDAO dataDAO = new DataDAO();
+
         System.out.println("What do you want to do?");
         System.out.println("1 - See other users");
         System.out.println("2 - Delete Database");
@@ -46,6 +46,9 @@ public class Main {
     }
     
     public static boolean login() {
+        User user;
+        Scanner scan = new Scanner(System.in);
+
         System.out.println("TestUserDB - LOGIN");
         System.out.println("Enter your name");
         String name = scan.nextLine();
@@ -64,6 +67,9 @@ public class Main {
     }
 
     public static void readUser() {
+        Scanner scan = new Scanner(System.in);
+        User user;
+
         System.out.println("Enter a name:");
         String name = scan.nextLine();
 
