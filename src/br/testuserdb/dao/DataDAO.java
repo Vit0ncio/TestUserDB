@@ -36,7 +36,7 @@ public class DataDAO {
                         } else {
                             System.out.println("File could not be created.");
                         }
-                        break;
+                        insertDB();
                     }
 
                     case "n" -> {
@@ -72,7 +72,7 @@ public class DataDAO {
         ResultSet rs = null;
         PreparedStatement stmt = null;
         ConnectDAO connDAO = new ConnectDAO();
-        Connection conn = null;
+        Connection conn = ConnectDAO.connectDB();
 
         // Create the table
         String createTableSQL = "create table if not exists users (" +
@@ -89,7 +89,7 @@ public class DataDAO {
             stmt.execute(); // Execute the sql string
             System.out.println("Table created.");
         } catch (SQLException sqle) {
-            System.out.println("Error create table: " + sqle.getMessage());
+            System.out.println("Error creating the table: " + sqle.getMessage());
         }
 
         // Inserting data

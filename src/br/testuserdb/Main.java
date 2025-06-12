@@ -1,5 +1,6 @@
 package br.testuserdb;
 
+import br.testuserdb.dao.DataDAO;
 import br.testuserdb.dao.UserDAO;
 import br.testuserdb.model.User;
 
@@ -10,6 +11,8 @@ public class Main {
     static Scanner scan = new Scanner(System.in);
 
     public static void main(String[] args) {
+        DataDAO dataDAO = new DataDAO();
+        dataDAO.createDB();
         login();
         menu();
     }
