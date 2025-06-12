@@ -3,11 +3,8 @@ package br.testuserdb.dao;
 import java.sql.*;
 
 public class ConnectDAO {
-    static Connection conn = null;
-    static PreparedStatement stmt = null;
-    static ResultSet rs = null;
-
     public static Connection connectDB() {
+        Connection conn = null;
         try {
             // Get the URL to database
             conn = DriverManager.getConnection("jdbc:sqlite:db/testuser.db");
@@ -18,7 +15,7 @@ public class ConnectDAO {
         return conn;
     }
 
-    public static void disconnectDB() {
+    public static void disconnectDB(Connection conn, PreparedStatement stmt, ResultSet rs) {
         // Close the connection with the database
         // Exactly in this order: ResultSet, PreparedStatement and Connection
         try {
