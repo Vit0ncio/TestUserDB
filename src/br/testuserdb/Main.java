@@ -61,7 +61,7 @@ public class Main {
             System.out.println("Welcome " + user.getName() + "!");
             return true;
         } else {
-            System.out.println("Invalid login. Try Again.");
+            System.err.println("Invalid login. Try Again.");
             return false;
         }
     }

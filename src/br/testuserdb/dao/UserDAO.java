@@ -33,10 +33,11 @@ public class UserDAO {
                         rs.getString("role")
                 );
             } else {
-                System.out.println("User not found. Password or Name incorrect.");
+                System.err.println("User not found. Password or Name incorrect.");
             }
         } catch (SQLException sqle) {
-            System.out.println("Error in login: " + sqle.getMessage());
+            System.err.println("Error in login: " + sqle.getMessage());
+            return null;
         } finally {
             ConnectDAO.disconnectDB(conn, stmt, rs);
         }
@@ -66,7 +67,8 @@ public class UserDAO {
                 System.out.println("ID: " + id + "\n" + "Name: " + name + "\n" + "Email: " + email);
             }
         } catch (SQLException sqle) {
-            System.out.println("Error finding user: " + sqle.getMessage());
+            System.err.println("Error finding user: " + sqle.getMessage());
+            return null;
         }
         return user;
     }
