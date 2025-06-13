@@ -1,5 +1,7 @@
 package br.testuserdb.dao;
 
+import br.testuserdb.service.HashSHA256;
+
 import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
@@ -34,7 +36,7 @@ public class DataDAO {
                         if (created) {
                             System.out.println("File created.");
                         } else {
-                            System.out.println("File could not be created.");
+                            System.err.println("File could not be created.");
                         }
                         insertDB();
                     }
@@ -49,7 +51,7 @@ public class DataDAO {
                 }
             }
         } catch (IOException ioe) {
-            System.out.println("A error occurred. " + ioe.getMessage());
+            System.err.println("A error occurred. " + ioe.getMessage());
         }
         connDAO.connectDB();
     }
@@ -69,7 +71,7 @@ public class DataDAO {
             if (deleted) {
                 System.out.println("Database deleted successfully.");
             } else {
-                System.out.println("Failed to delete the database.");
+                System.err.println("Failed to delete the database.");
             }
         }
     }
@@ -95,7 +97,7 @@ public class DataDAO {
             stmt.execute(); // Execute the sql string
             System.out.println("Table created.");
         } catch (SQLException sqle) {
-            System.out.println("Error creating the table: " + sqle.getMessage());
+            System.err.println("Error creating the table: " + sqle.getMessage());
         }
 
         // Inserting data
@@ -114,15 +116,16 @@ public class DataDAO {
             // Why does SQLite work like this? I don't know
             // Adds users up to the limit of names entered
             for (int i = 0; i < names.length; i++) {
+                String hashedPassword = HashSHA256.hashPassword(passwords[i]);
                 stmt.setString(1, names[i]);
                 stmt.setString(2, emails[i]);
-                stmt.setString(3, passwords[i]);
+                stmt.setString(3, hashedPassword);
                 stmt.setString(4, roles[i]);
                 stmt.executeUpdate();
             }
             System.out.println("Users created.");
         } catch (SQLException sqle) {
-            System.out.println("Insert error: " + sqle.getMessage());
+            System.err.println("Insert error: " + sqle.getMessage());
         }
         // Disconnect from the database
         connDAO.disconnectDB(conn, stmt, rs);

@@ -1,6 +1,7 @@
 package br.testuserdb.dao;
 
 import br.testuserdb.model.User;
+import br.testuserdb.service.HashSHA256;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,11 +17,13 @@ public class UserDAO {
 
         try {
             conn = ConnectDAO.connectDB();
+            String hashedPassword = HashSHA256.hashPassword(password);
+
             String sql = "select * from users where name = ? and password = ?";
             stmt = conn.prepareStatement(sql);
 
             stmt.setString(1, name);
-            stmt.setString(2, password);
+            stmt.setString(2, hashedPassword);
 
             rs = stmt.executeQuery();
 
