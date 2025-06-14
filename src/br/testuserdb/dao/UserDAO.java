@@ -84,7 +84,7 @@ public class UserDAO {
         ResultSet rs = null;
 
         try {
-            String sql = "insert into users (name, email, password, rule) values (?, ?, ?, ?)";
+            String sql = "insert into users (name, email, password, role) values (?, ?, ?, ?)";
             stmt = conn.prepareStatement(sql);
 
             String hashedPassword = HashSHA256.hashPassword(password);
@@ -107,7 +107,7 @@ public class UserDAO {
             System.err.println("Error creating user: " + sqle.getMessage());
         } finally {
             ConnectDAO.disconnectDB(conn, stmt, rs);
-            return user;
         }
+        return user;
     }
 }
