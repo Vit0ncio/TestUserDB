@@ -3,6 +3,7 @@ package br.testuserdb.dao;
 import br.testuserdb.model.User;
 import br.testuserdb.service.HashSHA256;
 
+import javax.xml.transform.Result;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -74,5 +75,39 @@ public class UserDAO {
             return null;
         }
         return user;
+    }
+
+    public static User createUser(String name, String email, String password) {
+        User user = null;
+        Connection conn = ConnectDAO.connectDB();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            String sql = "insert into users (name, email, password, rule) values (?, ?, ?, ?)";
+            stmt = conn.prepareStatement(sql);
+
+            String hashedPassword = HashSHA256.hashPassword(password);
+
+            stmt.setString(1, user.getName());
+            stmt.setString(2, user.getEmail());
+            stmt.setString(3, hashedPassword);
+            stmt.setString(4, user.getRole());
+
+            int affectedRows = stmt.executeUpdate();
+
+            if (affectedRows > 0) {
+                try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        user.setId(generatedKeys.getInt(1));
+                    }
+                }
+            }
+        } catch (SQLException sqle) {
+            System.err.println("Error creating user: " + sqle.getMessage());
+        } finally {
+            ConnectDAO.disconnectDB(conn, stmt, rs);
+            return user;
+        }
     }
 }
