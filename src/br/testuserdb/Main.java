@@ -85,8 +85,8 @@ public class Main {
     }
 
     public static void createUser() {
+        UserDAO userDAO = new UserDAO();
         Scanner scan = new Scanner(System.in);
-        User user;
 
         System.out.println("Enter a name:");
         String name = scan.nextLine();
@@ -95,7 +95,9 @@ public class Main {
         System.out.println("Enter a password");
         String password = scan.nextLine();
 
-        user = UserDAO.createUser(name, email, password);
+        User newUser = new User(0, name, email, password, "user");
+
+        userDAO.createUser(newUser, password);
         menu();
     }
 }
