@@ -110,4 +110,28 @@ public class UserDAO {
             ConnectDAO.disconnectDB(conn, stmt, rs);
         }
     }
+
+    public static User deleteUser(String name) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            String sql = "delete from users where name = ?";
+
+            conn = ConnectDAO.connectDB();
+            stmt = conn.prepareStatement(sql);
+
+            stmt.setString(1, name);
+            stmt.executeUpdate();
+
+            System.out.println("User deleted successfully.");
+        } catch (SQLException sqle) {
+            System.err.println("Error in deleting user: " + sqle.getMessage());
+        } finally {
+            ConnectDAO.disconnectDB(conn, stmt, rs);
+        }
+
+        return null;
+    }
 }

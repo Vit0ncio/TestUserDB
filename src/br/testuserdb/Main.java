@@ -22,7 +22,8 @@ public class Main {
 
         System.out.println("What do you want to do?");
         System.out.println("1 - See other users");
-        System.out.println("2 - Delete Database");
+        System.out.println("2 - Delete User");
+        System.out.println("3 - Delete Database");
         System.out.println("0 - Exit");
         byte choice = scan.nextByte();
 
@@ -31,7 +32,9 @@ public class Main {
         switch (choice) {
             case 1 -> readUser();
 
-            case 2 -> dataDAO.deleteDB();
+            case 2 -> deleteUser();
+
+            case 3 -> dataDAO.deleteDB();
 
             case 0 -> {
                 System.out.println("Bye bye!");
@@ -95,5 +98,25 @@ public class Main {
 
         userDAO.createUser(newUser, password);
         menu();
+    }
+
+    public static void deleteUser() {
+        Scanner scan = new Scanner(System.in);
+
+        System.out.println("You really want to delete a user?");
+        String choice = scan.nextLine().trim().toLowerCase();
+
+        switch (choice) {
+            case "y" -> {
+                System.out.println("Enter a name: ");
+                String name = scan.nextLine();
+
+                UserDAO.deleteUser(name);
+            }
+
+            case "n" -> {
+                menu();
+            }
+        }
     }
 }
