@@ -29,13 +29,9 @@ public class Main {
         scan.nextLine();
 
         switch (choice) {
-            case 1 -> {
-                readUser();
-            }
+            case 1 -> readUser();
 
-            case 2 -> {
-                dataDAO.deleteDB();
-            }
+            case 2 -> dataDAO.deleteDB();
 
             case 0 -> {
                 System.out.println("Bye bye!");

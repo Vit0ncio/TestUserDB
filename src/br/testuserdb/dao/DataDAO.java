@@ -15,7 +15,7 @@ public class DataDAO {
     // Create the database file
     public void createDB() {
         Scanner scan = new Scanner(System.in);
-        File database = new File("db/testuser.db");
+        File database = new File("testuser.db");
         ConnectDAO connDAO = new ConnectDAO();
 
         try {
@@ -35,10 +35,10 @@ public class DataDAO {
 
                         if (created) {
                             System.out.println("File created.");
+                            insertDB();
                         } else {
                             System.err.println("File could not be created.");
                         }
-                        insertDB();
                     }
 
                     case "n" -> {
@@ -57,22 +57,17 @@ public class DataDAO {
     }
 
     public void deleteDB() {
-        ConnectDAO connDAO = new ConnectDAO();
         ResultSet rs = null;
         PreparedStatement stmt = null;
         Connection conn = null;
-        File database = new File("db/testuser.db");
+        File database = new File("testuser.db");
 
-        if (database.exists()) {
-            boolean deleted = database.delete();
+        ConnectDAO.disconnectDB(conn, stmt, rs);
 
-            connDAO.disconnectDB(conn, stmt, rs);
-
-            if (deleted) {
-                System.out.println("Database deleted successfully.");
-            } else {
-                System.err.println("Failed to delete the database.");
-            }
+        if (database.delete()) {
+            System.out.println("File deleted successfully.");
+        } else {
+            System.err.println("File could not be deleted.");
         }
     }
 
