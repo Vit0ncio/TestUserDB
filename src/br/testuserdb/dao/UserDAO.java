@@ -140,8 +140,7 @@ public class UserDAO {
         ResultSet rs = null;
 
         try {
-            String sql = "update users set email = ?, " +
-                         "where name = ?";
+            String sql = "update users set email = ? where name = ?";
 
             conn = ConnectDAO.connectDB();
             stmt = conn.prepareStatement(sql);
