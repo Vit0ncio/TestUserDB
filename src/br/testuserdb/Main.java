@@ -133,5 +133,7 @@ public class Main {
         String data = scan.nextLine();
 
         UserDAO.updateUser(choice, data, name);
+
+        menu();
     }
 }
