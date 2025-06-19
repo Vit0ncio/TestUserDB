@@ -123,12 +123,15 @@ public class Main {
     public static void updateUser() {
         Scanner scan = new Scanner(System.in);
 
-        System.out.println("Enter a name:");
+        System.out.println("Type the name of the user:");
         String name = scan.nextLine();
 
-        System.out.println("Type the new email:");
-        String email = scan.nextLine();
+        System.out.println("What you want to change? (name, email, password or role)");
+        String choice = scan.nextLine();
 
-        UserDAO.updateUser(email, name);
+        System.out.println("Type the new data:");
+        String data = scan.nextLine();
+
+        UserDAO.updateUser(choice, data, name);
     }
 }

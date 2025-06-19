@@ -134,18 +134,18 @@ public class UserDAO {
         return null;
     }
 
-    public static User updateUser(String email, String name) {
+    public static User updateUser(String choice, String data, String name) {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
         try {
-            String sql = "update users set email = ? where name = ?";
+            String sql = "update users set " + choice + " = ? where name = ?";
 
             conn = ConnectDAO.connectDB();
             stmt = conn.prepareStatement(sql);
 
-            stmt.setString(1, email);
+            stmt.setString(1, data);
             stmt.setString(2, name);
 
             stmt.executeUpdate();
