@@ -13,7 +13,6 @@ public class Main {
         DataDAO dataDAO = new DataDAO();
         dataDAO.createDB();
         login();
-        menu();
     }
 
     public static void menu() {
@@ -65,6 +64,7 @@ public class Main {
 
         if (user != null) {
             System.out.println("Welcome " + user.getName() + "!");
+            menu();
             return true;
         } else {
             System.err.println("Invalid login. Try Again.");
