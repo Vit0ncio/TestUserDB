@@ -152,6 +152,8 @@ public class UserDAO {
         } catch (SQLException sqle) {
             System.err.println("Error while updating users: " + sqle.getMessage());
         } finally {
+            System.out.println("Data updated successfully.");
+            System.out.println(choice + " = " + data);
             ConnectDAO.disconnectDB(conn, stmt, rs);
         }
         return null;
