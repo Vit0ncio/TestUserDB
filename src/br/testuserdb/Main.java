@@ -24,7 +24,6 @@ public class Main {
         System.out.println("1 - See other users");
         System.out.println("2 - Delete User");
         System.out.println("3 - Update User");
-        System.out.println("4 - Delete Database");
         System.out.println("0 - Exit");
         byte choice = scan.nextByte();
 
@@ -36,8 +35,6 @@ public class Main {
             case 2 -> deleteUser();
 
             case 3 -> updateUser();
-
-            case 4 -> dataDAO.deleteDB();
 
             case 0 -> {
                 System.out.println("Bye bye!");

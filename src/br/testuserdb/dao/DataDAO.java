@@ -56,21 +56,6 @@ public class DataDAO {
         connDAO.connectDB();
     }
 
-    public void deleteDB() {
-        ResultSet rs = null;
-        PreparedStatement stmt = null;
-        Connection conn = null;
-        File database = new File("testuser.db");
-
-        ConnectDAO.disconnectDB(conn, stmt, rs);
-
-        if (database.delete()) {
-            System.out.println("File deleted successfully.");
-        } else {
-            System.err.println("File could not be deleted.");
-        }
-    }
-
     public void insertDB() {
         ResultSet rs = null;
         PreparedStatement stmt = null;
